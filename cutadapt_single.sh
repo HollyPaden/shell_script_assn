@@ -20,6 +20,9 @@ output_directory="$2"
 forward_primer="$3"
 reverse_primer="$4"
 
+# Create and assign output directory
+mkdir -p $output_directory
+
 #Check whether the FASTQ file exists, if it is a regular file, and if it can be read
 if [ ! -f "$forward_fastq" ] || [ ! -r "$forward_fastq" ] || [ ! -e "$fprward_fastq" ]; then
 
