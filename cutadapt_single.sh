@@ -12,8 +12,8 @@ date
 #Let script accept 4 arguments that can be passed to it on the command-line
 forward_fastq=
 output_directory=results_trim
-forward_primer=GAGTG[CT]CAGC[AC]GCCGCGGTAA
-reverse_primer=TTACCGCGGC[GT]GCTG[AG]CACTC  
+forward_primer="GAGTG[CT]CAGC[AC]GCCGCGGTAA"
+reverse_primer="TTACCGCGGC[GT]GCTG[AG]CACTC"  
 
 forward_fastq="$1"
 output_directory="$2"
@@ -39,3 +39,7 @@ if [ ! "$#" -eq 4 ]; then
     echo "You provided $#"
     exit 1
 fi
+
+#Compute the reverse complements of each primer
+fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
+rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)
