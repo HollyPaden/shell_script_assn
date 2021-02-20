@@ -20,4 +20,19 @@ output_directory="$2"
 forward_primer="$3"
 reverse_primer="$4"
 
-#Check that arguments are properly provided
+#Check whether the FASTQ file exists, if it is a regular file, and if it can be read
+if [ ! -f "$forward_fastq" ] || [ ! -r "$forward_fastq" ] || [ ! -e "$fprward_fastq" ]; then
+
+    echo "Error: either is not file, does not exist, or cannot be read"
+    echo "You provided $forward_fastq"
+    exit 1
+
+fi
+
+# check number of arguments pushed to command line
+if [ ! "$#" -eq 4 ]; then
+
+    echo "Error: number of arguments is too great"
+    echo "You provided $#"
+    exit 1
+fi
