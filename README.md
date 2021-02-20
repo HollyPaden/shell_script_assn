@@ -21,3 +21,13 @@ cutadapt --version`
 Export Conda environment to YAML file
 
 `conda env export > environment.yml`
+
+Add shebang line, pipe sets, and SLURM directives for project number, 20-minute wall-time limit, one node, one process, and one core.
+
+`#!/bin/bash
+#SBATCH --account=PAS1855
+#SBATCH --time=20
+#SBATCH --node=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+set -e -u -o pipefail`

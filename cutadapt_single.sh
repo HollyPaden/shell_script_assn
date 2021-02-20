@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --account=PAS18655
+#SBATCH --account=PAS1855
 #SBATCH --time=20
 #SBATCH --node=1
 #SBATCH --ntasks=1
