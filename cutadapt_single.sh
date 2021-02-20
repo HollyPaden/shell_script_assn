@@ -10,8 +10,8 @@ set -e -u -o pipefail
 date
 
 #Let script accept 4 arguments that can be passed to it on the command-line
-forward_fastq=./201-S4-V4-V5_S53_L001_R1_001.fastq
-output_directory=./results_trim
+forward_fastq=fastq/201-S4-V4-V5_S53_L001_R1_001.fastq
+output_directory=results_trim
 forward_primer="GAGTG[CT]CAGC[AC]GCCGCGGTAA"
 reverse_primer="TTACCGCGGC[GT]GCTG[AG]CACTC"  
 
