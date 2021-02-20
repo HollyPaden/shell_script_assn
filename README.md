@@ -108,7 +108,7 @@ Copy Cutadapt running script from assignment
     --discard-untrimmed --pair-filter=any \
     -o "$R1_out" -p "$R2_out" "$R1_in" "$R2_in"`
 
-Make changes according to arguemnts for this script
+Make changes according to arguments for this script
 
 `cutadapt -a "$forward_primer"..."$rp_complement" \
     -A "$reverse_primer"..."$fp_complement" \
