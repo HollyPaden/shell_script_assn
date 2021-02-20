@@ -60,3 +60,6 @@ cutadapt -a "$forward_primer"..."$rp_complement" \
     -A "$reverse_primer"..."$fp_complement" \
     --discard-untrimmed --pair-filter=any \
     -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq"
+
+#Follow up with date
+date

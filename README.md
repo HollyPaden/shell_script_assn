@@ -114,3 +114,5 @@ Make changes according to arguments for this script
     -A "$reverse_primer"..."$fp_complement" \
     --discard-untrimmed --pair-filter=any \
     -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq"`
+
+Add date to end of script
