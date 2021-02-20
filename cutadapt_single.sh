@@ -35,7 +35,7 @@ fi
 # check number of arguments pushed to command line
 if [ ! "$#" -eq 4 ]; then
 
-    echo "Error: number of arguments is too great"
+    echo "Error: number of arguments is incorrect"
     echo "You provided $#"
     exit 1
 fi
@@ -45,7 +45,7 @@ fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
 rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)
 
 #Infer reverse reads FASTQ file from forward reads FASTQ file
-##########reverse_fastq=$(echo "$forward_fastq" )
+reverse_fastq="$(echo "$forward_fastq" | grep  _R1_ | sed 's/R1/R2/' )"
 
 #Change output file name
 trimmed_fastq_f="$(basename "$forward_fastq" .fastq)-_trimmed.fastq"
