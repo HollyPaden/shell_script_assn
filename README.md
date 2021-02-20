@@ -83,3 +83,10 @@ Use `tr` and `rev` to generate primer complements
 `#Compute the reverse complements of each primer
 fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
 rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)`
+
+Infer the reverse reads FASTQ file name from the forward reads FASTQ file name
+
+`#Infer reverse reads FASTQ file from forward reads FASTQ file
+##########reverse_fastq=$(echo "$forward_fastq" )`
+
+**Note: come back to this step, still incomplete**
