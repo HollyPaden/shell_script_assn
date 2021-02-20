@@ -31,3 +31,7 @@ Add shebang line, pipe sets, and SLURM directives for project number, 20-minute 
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
 set -e -u -o pipefail`
+
+Load OSC Conda module (see steps above) and activate Cutadapt Conda environment
+
+`source activate cutadaptenv`
