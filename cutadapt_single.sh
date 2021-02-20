@@ -10,7 +10,7 @@ set -e -u -o pipefail
 date
 
 #Let script accept 4 arguments that can be passed to it on the command-line
-forward_fastq=
+forward_fastq=fastq/201-S4-V4-V5_S53_L001_R1_001.fastq
 output_directory=results_trim
 forward_primer="GAGTG[CT]CAGC[AC]GCCGCGGTAA"
 reverse_primer="TTACCGCGGC[GT]GCTG[AG]CACTC"  
@@ -43,3 +43,14 @@ fi
 #Compute the reverse complements of each primer
 fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
 rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)
+
+#Infer reverse reads FASTQ file from forward reads FASTQ file
+##########reverse_fastq=$(echo "$forward_fastq" )
+
+#Change output file name
+trimmed_fastq_f="$(basename "$forward_fastq" .fastq)-_trimmed.fastq"
+trimmed_fastq_r="$(basename "$reverse_fastq" .fastq)-_trimmed.fastq"
+
+#Assign output file paths
+"$forward_fastq" > "$output_directory"/"$trimmed_fastq_f"
+"$reverse_fastq" > "$output_directory"/"$trimmed_fastq_r"

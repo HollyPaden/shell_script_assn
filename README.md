@@ -90,3 +90,13 @@ Infer the reverse reads FASTQ file name from the forward reads FASTQ file name
 ##########reverse_fastq=$(echo "$forward_fastq" )`
 
 **Note: come back to this step, still incomplete**
+
+Assign the output file paths and rename for trimming
+
+`#Change output file name
+trimmed_fastq_f="$(basename "$forward_fastq" .fastq)-_trimmed.fastq"
+trimmed_fastq_r="$(basename "$reverse_fastq" .fastq)-_trimmed.fastq"
+
+`#Assign output file paths
+"$forward_fastq" > "$output_directory"/"$trimmed_fastq_f"
+"$reverse_fastq" > "$output_directory"/"$trimmed_fastq_r"``
