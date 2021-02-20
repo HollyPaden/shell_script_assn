@@ -18,3 +18,6 @@ conda create -n cutadaptenv cutadapt
 conda activate cutadaptenv
 cutadapt --version`
 
+Export Conda environment to YAML file
+
+`conda env export > environment.yml`
