@@ -54,3 +54,9 @@ trimmed_fastq_r="$(basename "$reverse_fastq" .fastq)-_trimmed.fastq"
 #Assign output file paths
 "$forward_fastq" > "$output_directory"/"$trimmed_fastq_f"
 "$reverse_fastq" > "$output_directory"/"$trimmed_fastq_r"
+
+#Call Cutadapt
+cutadapt -a "$forward_primer"..."$rp_complement" \
+    -A "$reverse_primer"..."$fp_complement" \
+    --discard-untrimmed --pair-filter=any \
+    -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq"
