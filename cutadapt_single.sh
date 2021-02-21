@@ -60,18 +60,22 @@ reverse_fastq="$(echo "$forward_fastq" | grep  _R1_ | sed 's/R1/R2/' )"
 echo "Reverse reads FASTQ initiated"
 
 #Change output file name
-trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq
+trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_f"
 
-trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq
+trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_r"
 
 #Indicate trimmed FASTQ arguments created
 echo "Sequence trim completed...calling Cutadapt"
+
+#Create output for cutadapt readout
+readout=$(basename "$forward_fastq" .fastq)_cutadapt_readout.txt > "$output_directory"/"$readout"
 
 #Call Cutadapt
 cutadapt -a "$forward_primer"..."$rp_complement" \
     -A "$reverse_primer"..."$fp_complement" \
     --discard-untrimmed --pair-filter=any \
-    -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq" \
+    -o "$output_directory"/"$trimmed_fastq_f" -p "$output_directory"/"$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq" \
+    > "$output_directory"/"$readout"
 
 #Report completion of Cutadapt run
 echo "Cutadapt complete at..."
