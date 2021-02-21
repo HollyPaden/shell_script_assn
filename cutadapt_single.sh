@@ -10,15 +10,17 @@ set -e -u -o pipefail
 date
 
 #Let script accept 4 arguments that can be passed to it on the command-line
+forward_fastq="$1"
+output_directory="$2"
+forward_primer="$3"
+reverse_primer="$4"
+
 forward_fastq=fastq/201-S4-V4-V5_S53_L001_R1_001.fastq
 output_directory=results_trim
 forward_primer="GAGTGYCAGCMGCCGCGGTAA"
 reverse_primer="TTACCGCGGCKGCTGRCACTC"  
 
-#forward_fastq="$1"
-#output_directory="$2"
-#forward_primer="$3"
-#reverse_primer="$4"
+
 
 # Create and assign output directory
 mkdir -p "$output_directory"
