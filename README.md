@@ -81,8 +81,8 @@ fi`
 Use `tr` and `rev` to generate primer complements
 
 `#Compute the reverse complements of each primer
-fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
-rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)`
+fp_complement=$(echo "$forward_primer" | tr ATGCYM TACGRK | rev)
+rp_complement=$(echo "$reverse_primer" | tr ATGCKR TACGMY | rev)`
 
 Infer the reverse reads FASTQ file name from the forward reads FASTQ file name
 
@@ -91,13 +91,15 @@ reverse_fastq="$(echo "$forward_fastq" | grep  _R1_ | sed 's/R1/R2/' )"`
 
 Assign the output file paths and rename for trimming
 
-`#Change output file name
-trimmed_fastq_f="$(basename "$forward_fastq" .fastq)-_trimmed.fastq"
-trimmed_fastq_r="$(basename "$reverse_fastq" .fastq)-_trimmed.fastq"
+`#Change output file name and assign output file paths
+trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_f"
 
-`#Assign output file paths
-"$forward_fastq" > "$output_directory"/"$trimmed_fastq_f"
-"$reverse_fastq" > "$output_directory"/"$trimmed_fastq_r"`
+trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_r"`
+
+Make an output .txt for the cutadapt script in case you want it
+
+`#Create output for cutadapt readout
+readout=$(basename "$forward_fastq" .fastq)_cutadapt_readout.txt > "$output_directory"/"$readout"`
 
 Copy Cutadapt running script from assignment
 
@@ -111,6 +113,7 @@ Make changes according to arguments for this script
 `cutadapt -a "$forward_primer"..."$rp_complement" \
     -A "$reverse_primer"..."$fp_complement" \
     --discard-untrimmed --pair-filter=any \
-    -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq"`
+    -o "$output_directory"/"$trimmed_fastq_f" -p "$output_directory"/"$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq" \
+    > "$output_directory"/"$readout"`
 
 Add date to end of script
