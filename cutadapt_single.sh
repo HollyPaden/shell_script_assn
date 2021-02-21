@@ -62,9 +62,11 @@ reverse_fastq="$(echo "$forward_fastq" | grep  _R1_ | sed 's/R1/R2/' )"
 echo "Reverse reads FASTQ initiated"
 
 #Change output file name
-trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_f"
+trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq 
+#> "$output_directory"/"$trimmed_fastq_f"
 
-trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq > "$output_directory"/"$trimmed_fastq_r"
+trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq 
+#> "$output_directory"/"$trimmed_fastq_r"
 
 #Indicate trimmed FASTQ arguments created
 echo "Sequence trim completed...calling Cutadapt"
