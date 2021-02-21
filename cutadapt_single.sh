@@ -12,8 +12,8 @@ date
 #Let script accept 4 arguments that can be passed to it on the command-line
 forward_fastq=fastq/201-S4-V4-V5_S53_L001_R1_001.fastq
 output_directory=results_trim
-forward_primer="GAGTG[CT]CAGC[AC]GCCGCGGTAA"
-reverse_primer="TTACCGCGGC[GT]GCTG[AG]CACTC"  
+forward_primer="GAGTGYCAGCMGCCGCGGTAA"
+reverse_primer="TTACCGCGGCKGCTGRCACTC"  
 
 #forward_fastq="$1"
 #output_directory="$2"
@@ -47,8 +47,8 @@ fi
 echo "Control checks complete, files and arguments accepted"
 
 #Compute the reverse complements of each primer
-fp_complement=$(echo "$forward_primer" | tr ATGC[] TACG][ | rev)
-rp_complement=$(echo "$reverse_primer" | tr ATGC[] TACG][ | rev)
+fp_complement=$(echo "$forward_primer" | tr ATGCYM TACGRK | rev)
+rp_complement=$(echo "$reverse_primer" | tr ATGCKR TACGMY | rev)
 
 #Indicate complements calculated
 echo "Primer compliments computed"
@@ -60,26 +60,18 @@ reverse_fastq="$(echo "$forward_fastq" | grep  _R1_ | sed 's/R1/R2/' )"
 echo "Reverse reads FASTQ initiated"
 
 #Change output file name
-trimmed_fastq_f="$(basename "$forward_fastq" .fastq)-_trimmed.fastq"
-echo "$trimmed_fastq_f"
-trimmed_fastq_r="$(basename "$reverse_fastq" .fastq)-_trimmed.fastq"
-echo "$trimmed_fastq_r"
+trimmed_fastq_f=$(basename "$forward_fastq" .fastq)_trimmed.fastq
+
+trimmed_fastq_r=$(basename "$reverse_fastq" .fastq)_trimmed.fastq
 
 #Indicate trimmed FASTQ arguments created
-echo "Trimmed sequences completed...assigning to directory"
-
-#Assign output file paths
-"$forward_fastq" > "$output_directory"/"$trimmed_fastq_f"
-"$reverse_fastq" > "$output_directory"/"$trimmed_fastq_r"
-
-#Indicate assignment complete
-echo "Directory assignment complete...calling Cutadapt"
+echo "Sequence trim completed...calling Cutadapt"
 
 #Call Cutadapt
 cutadapt -a "$forward_primer"..."$rp_complement" \
     -A "$reverse_primer"..."$fp_complement" \
     --discard-untrimmed --pair-filter=any \
-    -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq"
+    -o "$trimmed_fastq_f" -p "$trimmed_fastq_r" "$forward_fastq" "$reverse_fastq" \
 
 #Report completion of Cutadapt run
 echo "Cutadapt complete at..."
